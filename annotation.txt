@@ -1,0 +1,17 @@
+
+tengo que investigar como configurar manualmente estas cosas
+
+restartedMain o.s.s.web.DefaultSecurityFilterChain     : 
+Will secure any request with: 
+web session Disable Encode Url Filter 
+web context request async Web Async Manager Integration Filter
+web context Security ContextPersistence Filter 
+web header Header Writer Filter 
+web authentication logout Logout Filter 
+oauth2 server resource web Bearer Token Authentication Filter 
+web savedrequest Request Cache Aware Filter 
+web servletapi Security Context Holder Aware RequestFilter 
+web authentication Anonymous Authentication Filter 
+web session Session Management Filter 
+web access Exception Translation Filter 
+web access intercept FilterSecurity Interceptor
