@@ -11,9 +11,13 @@ public class FormacionAcademicaModels {
     @Column(unique = true,nullable = false)
     private int id;
 
-
+    @Column(length = 50, nullable = false)
     private String institucion;
+
+    @Column(length = 255)
     private String descripcion;
+
+    @Column(length = 50)
     private String ubicacion;
     
     
@@ -40,7 +44,5 @@ public class FormacionAcademicaModels {
     }
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-    
-    
+    }    
 }

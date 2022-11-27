@@ -13,11 +13,18 @@ public class ExperienciaLaboralModels {
     @Column(unique = true,nullable = false)
     private int id;
 
-
+    @Column(length = 50, nullable = false)
     private String empresa;
+
+    @Column(length = 255)
     private String descripcion;
+
+    @Column(length = 50)
     private String ubicacion;
+
+    
     private Date fechaDeInicio;
+
     private Date fechaDefinalizacion;
     
     public int getId() {
@@ -56,6 +63,4 @@ public class ExperienciaLaboralModels {
     public void setFechaDefinalizacion(Date fechaDefinalizacion) {
         this.fechaDefinalizacion = fechaDefinalizacion;
     }
-    
-
 }

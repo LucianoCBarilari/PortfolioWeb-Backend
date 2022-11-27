@@ -36,7 +36,6 @@ import lombok.var;
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
-
     private RSAKey rsaKey;
 
 	private final JpaUserDetailService myUserDetailsServices;
@@ -54,7 +53,7 @@ public class WebSecurityConfig {
         return new ProviderManager(authProvider);
     }
 
-  /*@Bean //crear un usuario en la memoria
+    /*@Bean //crear un usuario en la memoria
     public UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("user")
@@ -64,17 +63,40 @@ public class WebSecurityConfig {
         );
     }*/
 
-
-
-	@Bean
+    @Bean
 	public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
 		
 		return httpSecurity
 		                   .csrf(csrf -> csrf.disable())
 						   .authorizeRequests(auth ->{ auth
-							.mvcMatchers("/token").permitAll()
-							.anyRequest().authenticated();						    		  
-
+							.mvcMatchers(
+                                         "/token",
+                                         "/acercademi/mostrar",
+                                         "/experienciaLaboral/mostrar",
+                                         "/formacionacademica/mostrar",
+                                         "/habilidades/mostrar",
+                                         "/proyectos/mostrar"
+                                         )
+                            .permitAll()
+							.antMatchers(                                
+                                         "/acercademi/crear",
+                                         "/acercademi/borrar/{id}",
+                                         "/acercademi/actualizar",
+                                         "/experienciaLaboral/mostrar/{id}",
+                                         "/experienciaLaboral/crear",
+                                         "/experienciaLaboral/borrar/{id}",
+                                         "/experienciaLaboral/actualizar",
+                                         "/formacionacademica/crear",
+                                         "/formacionacademica/borrar/{id}",
+                                         "/formacionacademica/actualizar",
+                                         "/habilidades/crear",
+                                         "/habilidades/borrar/{id}",
+                                         "/habilidades/actualizar",
+                                         "/proyectos/crear",
+                                         "/proyectos/borrar/{id}",
+                                         "/proyectos/actualizar"
+                                         )
+                            .authenticated();	
 						   })
                            .cors(Customizer.withDefaults())
 						   .userDetailsService(myUserDetailsServices)
@@ -82,38 +104,33 @@ public class WebSecurityConfig {
 						   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))					   
 						   .build();	
 	}
-	@Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        rsaKey = Jwks.generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwks) {
-        return new NimbusJwtEncoder(jwks);
-    }
-
-    @Bean
-    JwtDecoder jwtDecoder() throws JOSEException {
-         return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
-    }
-
-	@Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        configuration.setAllowedOrigins(Arrays.asList(""));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(List.of("Content-Type")); //"Authorization" aqui seleccion el tipo de headear
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-    
-    
+    /* */
+	@Bean
+    public JWKSource<SecurityContext> jwkSource() {
+        rsaKey = Jwks.generateRsa();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+    }
+    @Bean
+    JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwks) {
+        return new NimbusJwtEncoder(jwks);
+    }
+    @Bean
+    JwtDecoder jwtDecoder() throws JOSEException {
+         return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
+    }
+	@Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }   
 }

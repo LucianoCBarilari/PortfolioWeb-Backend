@@ -10,8 +10,13 @@ public class HabilidadesDurasYBlandasModels {
     @Column(unique = true,nullable = false)
     private int id;
 
+    @Column(length = 50, nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private int cuantoSabes;
+
+    @Column(length = 50, nullable = false)
     private String queHabilidadEs;
     
     
@@ -38,7 +43,5 @@ public class HabilidadesDurasYBlandasModels {
     }
     public void setQueHabilidadEs(String queHabilidadEs) {
         this.queHabilidadEs = queHabilidadEs;
-    }
-
-    
+    }    
 }

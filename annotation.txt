@@ -15,3 +15,30 @@ web authentication Anonymous Authentication Filter
 web session Session Management Filter 
 web access Exception Translation Filter 
 web access intercept FilterSecurity Interceptor
+
+all paths
+public
+/acercademi/mostrar
+/experienciaLaboral/mostrar
+/formacionacademica/mostrar
+/habilidades/mostrar
+/proyectos/mostrar
+/token
+
+private
+/acercademi/crear
+/acercademi/borrar/{id}
+/acercademi/actualizar
+/experienciaLaboral/mostrar/{id}
+/experienciaLaboral/crear
+/experienciaLaboral/borrar/{id}
+/experienciaLaboral/actualizar
+/formacionacademica/crear
+/formacionacademica/borrar/{id}
+/formacionacademica/actualizar
+/habilidades/crear
+/habilidades/borrar/{id}
+/habilidades/actualizar
+/proyectos/crear
+/proyectos/borrar/{id}
+/proyectos/actualizar

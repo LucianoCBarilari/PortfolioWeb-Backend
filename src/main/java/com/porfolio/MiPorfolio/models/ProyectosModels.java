@@ -4,15 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Proyectos")
-public class ProyectosModels {
-    
+public class ProyectosModels {    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
     private int id;
 
+    @Column(length = 50, nullable = false)
     private String nombre;
+
+    @Column(length = 255, nullable = false)
     private String descripcion;
    
     public int getId() {
@@ -33,6 +35,4 @@ public class ProyectosModels {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    
 }
