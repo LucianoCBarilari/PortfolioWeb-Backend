@@ -107,9 +107,9 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(""));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-        configuration.setAllowedHeaders(List.of("Content-Type")); //"Authorization" aqui seleccion el tipo de headear
+        configuration.setAllowedHeaders(List.of("Content-Type","Authorization")); //"Authorization" aqui seleccion el tipo de headear
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
