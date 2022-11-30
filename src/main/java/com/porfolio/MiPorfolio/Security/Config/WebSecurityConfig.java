@@ -29,7 +29,6 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.porfolio.MiPorfolio.Security.Services.JpaUserDetailService;
-import lombok.var;
 /* */
 @Configuration
 @EnableWebSecurity
